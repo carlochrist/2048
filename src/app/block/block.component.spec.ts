@@ -7,10 +7,11 @@ describe('BlockComponent', () => {
   let fixture: ComponentFixture<BlockComponent>;
 
   beforeEach(async () => {
+
     await TestBed.configureTestingModule({
-      declarations: [ BlockComponent ]
+      declarations: [BlockComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
