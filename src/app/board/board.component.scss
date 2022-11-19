@@ -1,7 +1,18 @@
+.grid {
+  display: grid;
+  gap: 1px;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+div>div {
+  // padding: 10px;
+  // background-color: #ccc;
+}
+
 .game {
   // text-align: center;
   // margin: 10%;
-  width: 40%;
+  // width: 40%;
 }
 
 .container {

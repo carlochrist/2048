@@ -4,7 +4,8 @@ import { Component, HostListener } from '@angular/core';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  styles: [':host {display: block;}']
 })
 export class AppComponent {
   title = '2048';

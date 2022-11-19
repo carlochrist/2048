@@ -6,24 +6,41 @@ import { Component, Input, OnInit } from '@angular/core';
   templateUrl: './block.component.html',
   styleUrls: ['./block.component.scss'],
   animations: [
-    trigger('popOverState', [
-      state('show', style({
-        opacity: 1
-      })),
-      state('hide', style({
-        opacity: 0
-      })),
-      transition('show => hide', animate('600ms ease-out')),
-      transition('hide => show', animate('1000ms ease-in'))
-    ])
-  ]
+    trigger(
+      'zoomIn', [
+      transition(':enter', [
+        style({ transform: 'scale(0)', opacity: 0, }),
+        animate('300ms', style({ transform: 'scale(1)', opacity: 1, }))
+      ]),
+    ]
+    )
+  ],
+  // animations: [
+  //   // fadeIn, zoomIn
+  //   zoomIn
+  //   // trigger("myTrigger", [
+  //   //   // state(
+  //   //   //   "popOverState",
+  //   //   //   style({
+  //   //   //     opacity: "1"
+  //   //   //   })
+  //   //   // ),
+  //   //   // transition("void => *", [
+  //   //   //   style({ opacity: "0", transform: "translateX(20px)" }),
+  //   //   //   animate("500ms")
+  //   //   // ])
+  //   //   state('move', style({
+  //   //     transform: 'translateX(-100%)',
+  //   //   })),
+  //   //   transition('* => *', animate('500ms ease')),
+  //   // ])
 })
 export class BlockComponent {
 
   @Input() value: string = '';
-  @Input() newRndNumber: boolean = false;
+  @Input() zoom: boolean = false;
 
-  constructor() { }
+  // @Input() newRndNumber: boolean = false;
 
   getBlockColor(blockValue: string): string {
     const blockValueAsNumber = parseInt(blockValue);

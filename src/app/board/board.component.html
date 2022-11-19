@@ -1,17 +1,15 @@
 <div class="game">
-  <!-- <div class="lol">
+  <div class="lol">
     <button nbButton class="btn-new" (click)="newGame()" status="primary">New Game</button>
-
-  </div> -->
+  </div>
   <!-- <button nbButton class="btn-new" (click)="createNewRandomNumberAndField()" status="primary">New Number</button> -->
   <!-- <button nbButton class="btn-new" (click)="placeNewNumber()" status="primary">PLACE IT!</button> -->
-  <!-- ({{randomEmptyBlock}}) -->
-  <!-- {{newNumberToPlace}} -->
-  <div class="container gesture__zone" (swipe)="onSwipe($event)">
-    <div class="flex-container" *ngFor="let row of board; let i = index">
+  <div class="container gesture__zone" style="position: relative;" (swipe)="onSwipe($event)">
+    <div class="flex-container" style="overflow: hidden;" *ngFor="let row of board; let i = index">
       <div *ngFor="let value of row; let j = index">
-        <!-- <app-block [value]="value" [ngClass]="{'next-block': checkBlock(i, j)}"></app-block> -->
-        <app-block [value]="value" [newRndNumber]="checkBlock(i, j)"></app-block>
+        <app-block [zoom]="!(i === randomEmptyBlock[0] && 
+        j === randomEmptyBlock[1])" [value]="value">
+        </app-block>
       </div>
     </div>
   </div>
