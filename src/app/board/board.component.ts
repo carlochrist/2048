@@ -1,15 +1,23 @@
+import { trigger, state, style, transition, animate, keyframes } from '@angular/animations';
 import { Component, HostListener, OnInit } from '@angular/core';
-import { timer } from 'rxjs';
 
 @Component({
   selector: 'app-board',
   templateUrl: './board.component.html',
-  styleUrls: ['./board.component.scss']
+  styleUrls: ['./board.component.scss'],
 })
 export class BoardComponent implements OnInit {
   board: string[][] = new Array();
   oldBoardState: string[][] = new Array();
   atLeastOneBlockMoved = false;
+
+  flag: boolean = true;
+  // items = ["item 1", "item 2", "item 3"];
+  state: string = "move";
+
+  locked = false;
+
+  animationDisabled = true;
 
   constructor() { }
 
@@ -29,17 +37,16 @@ export class BoardComponent implements OnInit {
     // init with two rnd-values
     this.createNewRandomNumberAndField(2);
     this.placeNewNumber()
-
     this.createNewRandomNumberAndField();
     this.placeNewNumber()
 
     // this.board[0][0] = '16'
     // this.board[0][1] = '16'
     // this.board[0][2] = '16'
-    // this.board[0][3] = '4'
-    // this.board[1][0] = '16'
+    // this.board[0][3] = '16'
+    // this.board[1][0] = '8'
     // this.board[1][1] = '16'
-    // this.board[1][2] = '16'
+    // this.board[1][2] = '8'
     // this.board[1][3] = '4'
     // this.board[2][0] = '16'
     // this.board[2][1] = '16'
@@ -49,7 +56,6 @@ export class BoardComponent implements OnInit {
     // this.board[3][1] = '16'
     // this.board[3][2] = '16'
     // this.board[3][3] = '4'
-
   }
 
   randomEmptyBlock: any;
@@ -70,14 +76,12 @@ export class BoardComponent implements OnInit {
     // console.log("emptyblocks: ", emptyBlocks)
     // console.table(filledBlocks)
     // game lost
-
     emptyBlocks[Math.floor(Math.random() * emptyBlocks.length)];
     // debugger;
     this.newNumberToPlace = numberToPlace ? numberToPlace.toString() : [2, 4][Math.floor(Math.random() * 2)].toString();
     this.randomEmptyBlock = emptyBlocks[Math.floor(Math.random() * emptyBlocks.length)];
     // this.board[emptyBlocks[Math.floor(Math.random() * emptyBlocks.length)][0]][emptyBlocks[Math.floor(Math.random() * emptyBlocks.length)][1]] = newNumberToPlace;
     // this.board[this.randomEmptyBlock[0][this.randomEmptyBlock[1]]] = this.newNumberToPlace;
-
   }
 
   checkBlock(i: number, j: number) {
@@ -85,6 +89,11 @@ export class BoardComponent implements OnInit {
   }
 
   placeNewNumber() {
+
+    if (this.flag) {
+      // Enabling Animation
+      this.flag = !this.flag;
+    }
 
     this.board[this.randomEmptyBlock[0]][this.randomEmptyBlock[1]] = this.newNumberToPlace;
     // console.clear();
@@ -98,10 +107,10 @@ export class BoardComponent implements OnInit {
     if (this.isLost()) {
       setTimeout(() => {
         alert("YOU LOST!")
-
       }, 1);
     }
 
+    this.animationDisabled = true;
 
   }
 
@@ -160,7 +169,6 @@ export class BoardComponent implements OnInit {
     this.createNewRandomNumberAndField();
   }
 
-  locked = false;
 
   onSwipe(evt: any) {
     this.atLeastOneBlockMoved = false;
@@ -169,9 +177,9 @@ export class BoardComponent implements OnInit {
     const y = Math.abs(evt.deltaY) > 40 ? (evt.deltaY > 0 ? 'down' : 'up') : '';
 
     // if keyboard is locked: exit keydown handler
-    // if (this.locked) {
-    //   return;
-    // }
+    if (this.locked) {
+      return;
+    }
 
     // lock keyboard input
     this.locked = true;
@@ -189,8 +197,8 @@ export class BoardComponent implements OnInit {
       this.moveDown();
     }
 
-    // unlock keyboard input after 3 seconds
-    // setTimeout(() => { this.locked = false; }, 600);
+    // allow swipes after 300 ms
+    setTimeout(() => { this.locked = false; }, 600);
 
     if (this.atLeastOneBlockMoved) {
       this.createNewRandomNumberAndField();
@@ -198,16 +206,14 @@ export class BoardComponent implements OnInit {
     }
   }
 
-
-
-
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
 
     // if keyboard is locked: exit keydown handler
-    // if (this.locked) {
-    //   return;
-    // }
+    if (this.locked) {
+      console.log("LOCKED!!!")
+      return;
+    }
 
     // lock keyboard input
     this.locked = true;
@@ -223,8 +229,8 @@ export class BoardComponent implements OnInit {
       // default: null;
     }
 
-    // unlock keyboard input after 3 seconds
-    // setTimeout(() => { this.locked = false; }, 300);
+    // unlock keyboard input after 300 ms
+    setTimeout(() => { this.locked = false; }, 300);
 
     if (this.atLeastOneBlockMoved) {
       this.createNewRandomNumberAndField();
@@ -258,7 +264,10 @@ export class BoardComponent implements OnInit {
       this.checkRow(this.invertRow(transposedArray[i]), checkOnly)
       this.invertRow(transposedArray[i])
     }
-    this.board = this.transposeArray(transposedArray)
+
+    if (this.atLeastOneBlockMoved) {
+      this.board = this.transposeArray(transposedArray)
+    }
   }
 
   moveDown(checkOnly: boolean = false) {
@@ -266,7 +275,9 @@ export class BoardComponent implements OnInit {
     for (let i = 0; i < transposedArray.length; i++) {
       this.checkRow(transposedArray[i], checkOnly)
     }
-    this.board = this.transposeArray(transposedArray)
+    if (this.atLeastOneBlockMoved) {
+      this.board = this.transposeArray(transposedArray)
+    }
   }
 
   invertRow(row: any) {
@@ -302,14 +313,11 @@ export class BoardComponent implements OnInit {
                 row[i + 1] = (row[i] * 2).toString();
                 lastEmptyPositionFound = i;
               }
-
-
             }
             if (!checkOnly) {
               row[i] = '';
               lastValueFound = '';
             }
-
             this.atLeastOneBlockMoved = true;
           } else {
             if (lastEmptyPositionFound !== -1) {
@@ -319,7 +327,6 @@ export class BoardComponent implements OnInit {
                 row[i] = '';
                 lastEmptyPositionFound = i
               }
-
               this.atLeastOneBlockMoved = true;
             } else {
               if (!checkOnly) {
@@ -336,13 +343,11 @@ export class BoardComponent implements OnInit {
               row[i] = '';
               lastEmptyPositionFound--;
             }
-
             this.atLeastOneBlockMoved = true;
           } else {
             if (!checkOnly) {
               lastValueFound = row[i];
             }
-
           }
         }
       } else {
