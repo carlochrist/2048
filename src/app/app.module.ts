@@ -6,8 +6,6 @@ import { AppComponent } from './app.component';
 import { BoardComponent } from './board/board.component';
 import { BlockComponent } from './block/block.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NbThemeModule, NbLayoutModule, NbButtonModule } from '@nebular/theme';
-import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { CommonModule } from '@angular/common';
 import * as Hammer from 'hammerjs';
 
@@ -30,10 +28,6 @@ export class MyHammerConfig extends HammerGestureConfig {
     CommonModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    NbThemeModule.forRoot({ name: 'cosmic' }),
-    NbLayoutModule,
-    NbEvaIconsModule,
-    NbButtonModule,
     HammerModule
   ],
   providers: [{
