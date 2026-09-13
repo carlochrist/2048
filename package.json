@@ -29,7 +29,7 @@
     "@angular/build": "^20.3.37",
     "@angular/cli": "20.3.37",
     "@angular/compiler-cli": "20.3.31",
-    "@schematics/angular": "13.3.9",
+    "@schematics/angular": "^20.3.37",
     "@types/hammerjs": "^2.0.41",
     "@types/node": "^12.11.1",
     "typescript": "~5.8.3"
