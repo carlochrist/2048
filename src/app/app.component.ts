@@ -2,10 +2,11 @@ import { isPlatformBrowser } from '@angular/common';
 import { Component, HostListener } from '@angular/core';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
-  styles: [':host {display: block;}']
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.scss'],
+    styles: [':host {display: block;}'],
+    standalone: false
 })
 export class AppComponent {
   title = '2048';

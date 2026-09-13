@@ -2,38 +2,18 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-block',
-  templateUrl: './block.component.html',
-  styleUrls: ['./block.component.scss'],
-  animations: [
-    trigger(
-      'zoomIn', [
-      transition(':enter', [
-        style({ transform: 'scale(0)', opacity: 0, }),
-        animate('300ms', style({ transform: 'scale(1)', opacity: 1, }))
-      ]),
-    ]
-    )
-  ],
-  // animations: [
-  //   // fadeIn, zoomIn
-  //   zoomIn
-  //   // trigger("myTrigger", [
-  //   //   // state(
-  //   //   //   "popOverState",
-  //   //   //   style({
-  //   //   //     opacity: "1"
-  //   //   //   })
-  //   //   // ),
-  //   //   // transition("void => *", [
-  //   //   //   style({ opacity: "0", transform: "translateX(20px)" }),
-  //   //   //   animate("500ms")
-  //   //   // ])
-  //   //   state('move', style({
-  //   //     transform: 'translateX(-100%)',
-  //   //   })),
-  //   //   transition('* => *', animate('500ms ease')),
-  //   // ])
+    selector: 'app-block',
+    templateUrl: './block.component.html',
+    styleUrls: ['./block.component.scss'],
+    animations: [
+        trigger('zoomIn', [
+            transition(':enter', [
+                style({ transform: 'scale(0)', opacity: 0, }),
+                animate('300ms', style({ transform: 'scale(1)', opacity: 1, }))
+            ]),
+        ])
+    ],
+    standalone: false
 })
 export class BlockComponent {
 

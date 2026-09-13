@@ -2,9 +2,10 @@ import { trigger, state, style, transition, animate, keyframes } from '@angular/
 import { Component, HostListener, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-board',
-  templateUrl: './board.component.html',
-  styleUrls: ['./board.component.scss'],
+    selector: 'app-board',
+    templateUrl: './board.component.html',
+    styleUrls: ['./board.component.scss'],
+    standalone: false
 })
 export class BoardComponent implements OnInit {
   board: string[][] = new Array();
