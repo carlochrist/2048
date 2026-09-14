@@ -1,10 +1,16 @@
-            <!-- <button nbButton status="success"> {{j}}</button> -->
-            <!-- <button nbButton status="info"> {{j}}</button> -->
-            <!-- <button nbButton status="info"> {{value}}</button> -->
-            <!-- <button status="info" [ngClass]="{'next-block': newRndNumber}"> {{value}}</button> -->
-            <!-- <button [ngClass]="{'next-block': newRndNumber}"> {{value}}</button> -->
-            <!-- <button style="background-color: '#000'"> {{value}}</button> -->
-            <!-- <button [ngClass]="{'color': getBlockColor(value)}"> {{value}}</button> -->
-            <!-- <button class="block">{{value}}</button> -->
-            <button [ngStyle]="{'background-color':  getBlockColor(value)}" @zoomIn [@.disabled]="zoom">
-              {{value}}</button>
+<!-- <button nbButton status="success"> {{j}}</button> -->
+<!-- <button nbButton status="info"> {{j}}</button> -->
+<!-- <button nbButton status="info"> {{value}}</button> -->
+<!-- <button status="info" [ngClass]="{'next-block': newRndNumber}"> {{value}}</button> -->
+<!-- <button [ngClass]="{'next-block': newRndNumber}"> {{value}}</button> -->
+<!-- <button style="background-color: '#000'"> {{value}}</button> -->
+<!-- <button [ngClass]="{'color': getBlockColor(value)}"> {{value}}</button> -->
+<!-- <button class="block">{{value}}</button> -->
+<button
+  class="tile-button"
+  [ngStyle]="{ 'background-color': getBlockColor(value) }"
+  @zoomIn
+  [@.disabled]="zoom"
+>
+  {{ value }}
+</button>

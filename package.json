@@ -30,8 +30,11 @@
     "@angular/cli": "20.3.37",
     "@angular/compiler-cli": "20.3.31",
     "@schematics/angular": "^20.3.37",
+    "@tailwindcss/postcss": "^4.3.3",
     "@types/hammerjs": "^2.0.41",
     "@types/node": "^12.11.1",
+    "daisyui": "^5.7.37",
+    "tailwindcss": "^4.3.3",
     "typescript": "~5.8.3"
   }
 }

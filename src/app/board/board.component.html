@@ -1,15 +1,45 @@
-<div class="game">
-  <div class="lol">
-    <button nbButton class="btn-new" (click)="newGame()" status="primary">New Game</button>
-  </div>
-  <!-- <button nbButton class="btn-new" (click)="createNewRandomNumberAndField()" status="primary">New Number</button> -->
-  <!-- <button nbButton class="btn-new" (click)="placeNewNumber()" status="primary">PLACE IT!</button> -->
-  <div class="container gesture__zone" style="position: relative;" (swipe)="onSwipe($event)">
-    <div class="flex-container" style="overflow: hidden;" *ngFor="let row of board; let i = index">
-      <div *ngFor="let value of row; let j = index">
-        <app-block [zoom]="!(i === randomEmptyBlock[0] && 
-        j === randomEmptyBlock[1])" [value]="value">
-        </app-block>
+<div class="game-shell">
+  <div class="game-panel">
+    <header class="topbar">
+      <div class="title-wrap">
+        <span class="eyebrow">Classic puzzle</span>
+        <h1>2048</h1>
+      </div>
+
+      <div class="score-wrap">
+        <div class="score-box">
+          <span>Score</span>
+          <strong>{{ score }}</strong>
+        </div>
+
+        <div class="score-box">
+          <span>Best</span>
+          <strong>{{ bestScore }}</strong>
+        </div>
+      </div>
+    </header>
+
+    <div class="controls">
+      <p class="subtitle">Join the tiles and reach 2048.</p>
+      <button class="btn btn-primary btn-lg new-game-btn" (click)="newGame()">
+        New Game
+      </button>
+    </div>
+
+    <div class="board-wrapper">
+      <div class="board-container gesture__zone" (swipe)="onSwipe($event)">
+        <div class="board-row" *ngFor="let row of board; let i = index">
+          <div class="tile-slot" *ngFor="let value of row; let j = index">
+            <app-block
+              [zoom]="
+                !randomEmptyBlock ||
+                !(i === randomEmptyBlock[0] && j === randomEmptyBlock[1])
+              "
+              [value]="value"
+            >
+            </app-block>
+          </div>
+        </div>
       </div>
     </div>
   </div>

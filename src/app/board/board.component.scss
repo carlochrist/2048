@@ -1,106 +1,183 @@
-.grid {
-  display: grid;
-  gap: 1px;
-  grid-template-columns: repeat(3, 1fr);
+:host {
+  display: block;
+  min-height: 100vh;
 }
 
-div>div {
-  // padding: 10px;
-  // background-color: #ccc;
-}
-
-.game {
-  // text-align: center;
-  // margin: 10%;
-  // width: 40%;
-}
-
-.container {
-  // height: 50%;
-  // width: 50%;
-  // width: auto;
-  border: solid black 3px;
-  // box-sizing: border-box;
-  background-color: #AC9C90;
-  display: inline-grid
-}
-
-.flex-container {
-  // padding: 5px;
-  // margin: 5px;
-  list-style: none;
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
+.game-shell {
+  min-height: 100vh;
   display: flex;
-  -webkit-flex-flow: row;
-  // justify-content: space-around;
-  // line-height: 30px;
-  /* Center horizontally*/
-  // margin: 0 auto;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
 }
 
+.game-panel {
+  width: min(92vw, 38rem);
+  background: rgba(31, 41, 55, 0.9);
+  border: 1px solid rgba(157, 178, 255, 0.2);
+  border-radius: 1.5rem;
+  box-shadow: 0 24px 70px rgba(15, 23, 42, 0.45);
+  padding: 1.25rem;
+  backdrop-filter: blur(10px);
+}
 
-app-block {
-  // border: 2px solid red;
-  // background: tomato;
-  // margin: 5px;
-  color: white;
-  font-weight: bold;
-  font-size: 1.0em;
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.title-wrap {
+  display: flex;
+  flex-direction: column;
+}
+
+.eyebrow {
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(248, 248, 242, 0.7);
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(2.7rem, 6vw, 4rem);
+  line-height: 0.95;
+  font-weight: 800;
+  color: #f8f8f2;
+}
+
+.score-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.75rem;
+}
+
+.score-box {
+  min-width: 6.25rem;
+  padding: 0.8rem 0.9rem;
+  border-radius: 1rem;
+  background: rgba(21, 26, 39, 0.9);
+  border: 1px solid rgba(157, 178, 255, 0.15);
   text-align: center;
-  // flex: 1 0 auto;
-  height: auto;
-  // height: 200px;
-  // border: 2px solid red;
-  margin: 5px;
 }
 
-app-block::before {
-  content: '';
-  float: left;
-  padding-top: 100%;
+.score-box span {
+  display: block;
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(248, 248, 242, 0.7);
 }
 
-.btn-new {
-  margin-left: 150px;
-  color: black !important;
+.score-box strong {
+  display: block;
+  margin-top: 0.2rem;
+  font-size: clamp(1.1rem, 3vw, 1.5rem);
+  color: #f8f8f2;
 }
 
+.controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.subtitle {
+  margin: 0;
+  color: rgba(248, 248, 242, 0.8);
+  font-size: 0.94rem;
+}
+
+.new-game-btn {
+  min-width: 8.5rem;
+  border-radius: 0.9rem;
+  font-weight: 700;
+  box-shadow: 0 12px 24px rgba(139, 92, 246, 0.35);
+}
+
+.board-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.board-container {
+  width: 100%;
+  background: rgba(34, 39, 58, 0.95);
+  border-radius: 1.2rem;
+  border: 1px solid rgba(157, 178, 255, 0.12);
+  padding: 0.85rem;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.board-row {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.board-row + .board-row {
+  margin-top: 0.75rem;
+}
+
+.tile-slot {
+  position: relative;
+  aspect-ratio: 1;
+}
+
+.tile-slot app-block {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
 
 .gesture__zone {
-  padding: 5%;
-  margin: 3%;
-  border-radius: 3px;
-  // height: 500px;
-  text-align: center;
-  overflow: auto;
+  touch-action: none;
 }
 
 h1,
 p,
 .gesture__indicator {
   -webkit-user-select: none;
-  /* Chrome all / Safari all */
   -moz-user-select: none;
-  /* Firefox all */
   -ms-user-select: none;
-  /* IE 10+ */
   user-select: none;
-  /* Likely future */
 }
 
-.gesture__indicator {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 50px;
-  width: 50px;
-  display: block;
-  border-radius: 50%;
-  text-align: center;
-  line-height: 45px;
-  z-index: 10;
-  background-color: #42a5f5;
+@media (max-width: 640px) {
+  .game-shell {
+    padding: 1rem;
+  }
+
+  .game-panel {
+    width: min(96vw, 38rem);
+    padding: 1rem;
+  }
+
+  .topbar,
+  .controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .score-wrap {
+    justify-content: stretch;
+  }
+
+  .score-box {
+    flex: 1 1 calc(50% - 0.5rem);
+  }
+
+  .new-game-btn {
+    width: 100%;
+  }
+
+  .subtitle {
+    text-align: center;
+  }
 }

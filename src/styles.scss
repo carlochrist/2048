@@ -1,8 +1,29 @@
-html,
-body {
-  overflow: hidden;
+@import "tailwindcss";
+@plugin "daisyui";
+
+:root {
+  color-scheme: dark;
 }
 
-.columns {
-  display: block !important;
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  overflow-x: hidden;
+  background: #0f172a;
+  color: #f8f8f2;
+}
+
+body {
+  min-height: 100vh;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+button {
+  cursor: pointer;
+}
+
+app-root {
+  display: block;
+  min-height: 100vh;
 }
